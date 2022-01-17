@@ -22,32 +22,27 @@ class _QuizzlerState extends State<Quizzler> {
   int questionNumber = 0;
   List<Icon> listIcons = [];
   List<String> questionList = [
-    "Question1",
-    "Question2",
-    "Question3",
-    "Question4",
-    "Question5",
+    "Le piton des neiges est un volcan de la Réunion ?",
+    "Flutter permet de faire des applications web également",
+    "Php est le language utilisé par Flutter"
   ];
+  List<bool> reponseList = [true, true, false];
   bouttonClick() {
     setState(() {
       questionNumber++;
-      questionList[questionNumber];
     });
+    bool bonnereponse = reponseList[questionNumber - 1];
+    if (bonnereponse == true) {
+      setState(() {
+        listIcons.add(Icon(Icons.check, color: Colors.green));
+      });
+    } else {
+      setState(() {
+        listIcons.add(Icon(Icons.close, color: Colors.red));
+      });
+    }
     print('$questionNumber');
-  }
-
-  trueBoutton() {
-    setState(() {
-      listIcons.add(Icon(Icons.check, color: Colors.green));
-    });
-    bouttonClick();
-  }
-
-  falseBoutton() {
-    setState(() {
-      listIcons.add(Icon(Icons.close, color: Colors.red));
-    });
-    bouttonClick();
+    print('$bonnereponse');
   }
 
   @override
@@ -64,6 +59,7 @@ class _QuizzlerState extends State<Quizzler> {
               child: Center(
                 child: Text(
                   questionList[questionNumber],
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
@@ -77,7 +73,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(15),
               child: FlatButton(
                 color: Colors.green,
-                onPressed: (trueBoutton),
+                onPressed: (bouttonClick),
                 child: Text(
                   'True',
                   style: TextStyle(
@@ -94,7 +90,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(15),
               child: FlatButton(
                 color: Colors.red,
-                onPressed: (falseBoutton),
+                onPressed: (bouttonClick),
                 child: Text(
                   'False',
                   style: TextStyle(
