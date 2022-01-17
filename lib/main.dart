@@ -19,6 +19,7 @@ class Quizzler extends StatefulWidget {
 }
 
 class _QuizzlerState extends State<Quizzler> {
+  int questionNumber = 0;
   List<Icon> listIcons = [];
   List<String> questionList = [
     "Question1",
@@ -27,16 +28,26 @@ class _QuizzlerState extends State<Quizzler> {
     "Question4",
     "Question5",
   ];
+  bouttonClick() {
+    setState(() {
+      questionNumber++;
+      questionList[questionNumber];
+    });
+    print('$questionNumber');
+  }
+
   trueBoutton() {
     setState(() {
       listIcons.add(Icon(Icons.check, color: Colors.green));
     });
+    bouttonClick();
   }
 
   falseBoutton() {
     setState(() {
       listIcons.add(Icon(Icons.close, color: Colors.red));
     });
+    bouttonClick();
   }
 
   @override
@@ -52,7 +63,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(10),
               child: Center(
                 child: Text(
-                  questionList[1],
+                  questionList[questionNumber],
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
