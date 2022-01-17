@@ -19,6 +19,13 @@ class Quizzler extends StatefulWidget {
 }
 
 class _QuizzlerState extends State<Quizzler> {
+  List<Icon> listIcons = [
+    Icon(Icons.check, color: Colors.green),
+    Icon(Icons.close, color: Colors.red),
+    Icon(Icons.close, color: Colors.red),
+    Icon(Icons.check, color: Colors.green),
+    Icon(Icons.check, color: Colors.green),
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -84,28 +91,7 @@ class _QuizzlerState extends State<Quizzler> {
               child: Expanded(
                 flex: 1,
                 child: Row(
-                  children: [
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  ],
+                  children: listIcons,
                 ),
               ),
             ),
