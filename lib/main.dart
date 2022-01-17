@@ -20,6 +20,13 @@ class Quizzler extends StatefulWidget {
 
 class _QuizzlerState extends State<Quizzler> {
   List<Icon> listIcons = [];
+  List<String> questionList = [
+    "Question1",
+    "Question2",
+    "Question3",
+    "Question4",
+    "Question5",
+  ];
   trueBoutton() {
     setState(() {
       listIcons.add(Icon(Icons.check, color: Colors.green));
@@ -45,7 +52,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(10),
               child: Center(
                 child: Text(
-                  'Question',
+                  questionList[1],
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
