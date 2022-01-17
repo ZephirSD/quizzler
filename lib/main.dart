@@ -19,13 +19,19 @@ class Quizzler extends StatefulWidget {
 }
 
 class _QuizzlerState extends State<Quizzler> {
-  List<Icon> listIcons = [
-    Icon(Icons.check, color: Colors.green),
-    Icon(Icons.close, color: Colors.red),
-    Icon(Icons.close, color: Colors.red),
-    Icon(Icons.check, color: Colors.green),
-    Icon(Icons.check, color: Colors.green),
-  ];
+  List<Icon> listIcons = [];
+  trueBoutton() {
+    setState(() {
+      listIcons.add(Icon(Icons.check, color: Colors.green));
+    });
+  }
+
+  falseBoutton() {
+    setState(() {
+      listIcons.add(Icon(Icons.close, color: Colors.red));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,9 +59,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(15),
               child: FlatButton(
                 color: Colors.green,
-                onPressed: () {
-                  print('test');
-                },
+                onPressed: (trueBoutton),
                 child: Text(
                   'True',
                   style: TextStyle(
@@ -72,9 +76,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(15),
               child: FlatButton(
                 color: Colors.red,
-                onPressed: () {
-                  print('test');
-                },
+                onPressed: (falseBoutton),
                 child: Text(
                   'False',
                   style: TextStyle(
