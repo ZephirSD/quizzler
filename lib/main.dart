@@ -27,7 +27,7 @@ class _QuizzlerState extends State<Quizzler> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            flex: 5,
+            flex: 8,
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Center(
@@ -74,6 +74,38 @@ class _QuizzlerState extends State<Quizzler> {
                     color: Colors.white,
                     fontSize: 20,
                   ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            child: Padding(
+              padding: EdgeInsets.all(25),
+              child: Expanded(
+                flex: 1,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                    Icon(
+                      Icons.close,
+                      color: Colors.red,
+                    ),
+                    Icon(
+                      Icons.close,
+                      color: Colors.red,
+                    ),
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                  ],
                 ),
               ),
             ),
