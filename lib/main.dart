@@ -27,23 +27,55 @@ class _QuizzlerState extends State<Quizzler> {
     "Php est le language utilisé par Flutter"
   ];
   List<bool> reponseList = [true, true, false];
-  bouttonClick() {
+  buttonClick() {
     setState(() {
       questionNumber++;
+      questionList[questionNumber];
     });
-    bool bonnereponse = reponseList[questionNumber - 1];
-    if (bonnereponse == true) {
-      setState(() {
-        listIcons.add(Icon(Icons.check, color: Colors.green));
-      });
-    } else {
-      setState(() {
-        listIcons.add(Icon(Icons.close, color: Colors.red));
-      });
-    }
-    print('$questionNumber');
-    print('$bonnereponse');
   }
+
+  trueButton() {
+    bool bonnereponse = reponseList[questionNumber];
+    setState(() {
+      if (bonnereponse == true) {
+        listIcons.add(Icon(Icons.check, color: Colors.green));
+      } else {
+        listIcons.add(Icon(Icons.close, color: Colors.red));
+      }
+    });
+    buttonClick();
+  }
+
+  falseButton() {
+    bool bonnereponse = reponseList[questionNumber];
+    setState(() {
+      if (bonnereponse == false) {
+        listIcons.add(Icon(Icons.check, color: Colors.green));
+      } else {
+        listIcons.add(Icon(Icons.close, color: Colors.red));
+      }
+    });
+    buttonClick();
+  }
+
+  // falseButton() {
+  //   bool bonnereponse = reponseList[questionNumber];
+  //   int longueurQuestion = questionList.length;
+  //   print('$longueurQuestion');
+  //   if (longueurQuestion >= questionNumber) {
+  //     if (bonnereponse == false) {
+  //       setState(() {
+  //         listIcons.add(Icon(Icons.check, color: Colors.green));
+  //       });
+  //     } else {
+  //       setState(() {
+  //         listIcons.add(Icon(Icons.close, color: Colors.red));
+  //       });
+  //     }
+  //     print('$questionNumber');
+  //     print('$bonnereponse');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +85,7 @@ class _QuizzlerState extends State<Quizzler> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            flex: 8,
+            flex: 7,
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Center(
@@ -73,7 +105,9 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(15),
               child: FlatButton(
                 color: Colors.green,
-                onPressed: (bouttonClick),
+                onPressed: () {
+                  trueButton();
+                },
                 child: Text(
                   'True',
                   style: TextStyle(
@@ -85,12 +119,13 @@ class _QuizzlerState extends State<Quizzler> {
             ),
           ),
           Expanded(
-            flex: 1,
             child: Padding(
               padding: EdgeInsets.all(15),
               child: FlatButton(
                 color: Colors.red,
-                onPressed: (bouttonClick),
+                onPressed: () {
+                  falseButton();
+                },
                 child: Text(
                   'False',
                   style: TextStyle(
@@ -105,7 +140,6 @@ class _QuizzlerState extends State<Quizzler> {
             child: Padding(
               padding: EdgeInsets.all(25),
               child: Expanded(
-                flex: 1,
                 child: Row(
                   children: listIcons,
                 ),
