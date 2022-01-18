@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() {
   return runApp(
@@ -22,18 +23,17 @@ class _QuizzlerState extends State<Quizzler> {
   int questionNumber = 0;
   int reponseNumber = 0;
   List<Icon> listIcons = [];
-  List<String> questionList = [
-    "Le piton des neiges est un volcan de la Réunion ?",
-    "Flutter permet de faire des applications web également",
-    "Php est le language utilisé par Flutter"
+  List<Question> questions = [
+    Question("question1", true),
+    Question("question2", false),
+    Question("question3", true)
   ];
-  List<bool> reponseList = [true, true, false];
   buttonClick() {
-    int longueurQuestion = questionList.length;
+    int longueurQuestion = questions.length;
     setState(() {
       if (questionNumber < longueurQuestion - 1) {
         questionNumber++;
-        questionList[questionNumber];
+        questions[questionNumber].questionText;
       }
       if (reponseNumber < longueurQuestion) {
         reponseNumber++;
@@ -45,8 +45,8 @@ class _QuizzlerState extends State<Quizzler> {
 
   trueButton() {
     setState(() {
-      int longueurResponse = reponseList.length;
-      bool bonnereponse = reponseList[questionNumber];
+      int longueurResponse = questions.length;
+      bool bonnereponse = questions[questionNumber].questionAnswer;
       if (reponseNumber < longueurResponse) {
         if (bonnereponse == true) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
@@ -64,8 +64,8 @@ class _QuizzlerState extends State<Quizzler> {
 
   falseButton() {
     setState(() {
-      int longueurResponse = reponseList.length;
-      bool bonnereponse = reponseList[questionNumber];
+      int longueurResponse = questions.length;
+      bool bonnereponse = questions[questionNumber].questionAnswer;
       if (reponseNumber < longueurResponse) {
         if (bonnereponse == false) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
@@ -88,7 +88,7 @@ class _QuizzlerState extends State<Quizzler> {
         return AlertDialog(
           title: new Text("Vous avez terminé!!"),
           content: new Text("Voici votre score"),
-          actions: <Widget>[
+          actions: [
             new FlatButton(
               child: new Text("OK"),
               onPressed: () {
@@ -114,7 +114,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(10),
               child: Center(
                 child: Text(
-                  questionList[questionNumber],
+                  questions[questionNumber].questionText,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
