@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz-brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
@@ -35,40 +36,6 @@ class _QuizzlerState extends State<Quizzler> {
         quizBrain.nextQuestion();
       }
     });
-  }
-
-  falseButton() {
-    setState(() {
-      bool bonnereponse = quizBrain.getQuestionAnswer();
-      if (listIcons.length != quizBrain.longueurQuestion()) {
-        if (bonnereponse == false) {
-          listIcons.add(Icon(Icons.check, color: Colors.green));
-        } else {
-          listIcons.add(Icon(Icons.close, color: Colors.red));
-        }
-        quizBrain.nextQuestion();
-      }
-    });
-  }
-
-  void alertScore(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: new Text("Vous avez terminé!!"),
-          content: new Text("Voici votre score"),
-          actions: [
-            new FlatButton(
-              child: new Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
