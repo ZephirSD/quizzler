@@ -22,60 +22,33 @@ class Quizzler extends StatefulWidget {
 }
 
 class _QuizzlerState extends State<Quizzler> {
-  int questionNumber = 0;
-  int reponseNumber = 0;
   List<Icon> listIcons = [];
-  buttonClick() {
-    int longueurQuestion = quizBrain.longueurQuestion(questionNumber);
-    setState(() {
-      if (questionNumber < longueurQuestion - 1) {
-        questionNumber++;
-        quizBrain.getQuestionText(questionNumber);
-      }
-      if (reponseNumber < longueurQuestion) {
-        reponseNumber++;
-      }
-    });
-    print('$questionNumber');
-    print('$reponseNumber');
-  }
-
   trueButton() {
     setState(() {
-      int longueurResponse = quizBrain.longueurReponse(reponseNumber);
-      bool bonnereponse = quizBrain.getQuestionAnswer(questionNumber);
-      if (reponseNumber < longueurResponse) {
+      bool bonnereponse = quizBrain.getQuestionAnswer();
+      if (listIcons.length != quizBrain.longueurQuestion()) {
         if (bonnereponse == true) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
         } else {
           listIcons.add(Icon(Icons.close, color: Colors.red));
         }
+        quizBrain.nextQuestion();
       }
-      if (reponseNumber == longueurResponse - 1) {
-        alertScore(context);
-      }
-      print('$longueurResponse');
     });
-    buttonClick();
   }
 
   falseButton() {
     setState(() {
-      int longueurResponse = quizBrain.longueurReponse(reponseNumber);
-      bool bonnereponse = quizBrain.getQuestionAnswer(questionNumber);
-      if (reponseNumber < longueurResponse) {
+      bool bonnereponse = quizBrain.getQuestionAnswer();
+      if (listIcons.length != quizBrain.longueurQuestion()) {
         if (bonnereponse == false) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
         } else {
           listIcons.add(Icon(Icons.close, color: Colors.red));
         }
+        quizBrain.nextQuestion();
       }
-      if (reponseNumber == longueurResponse - 1) {
-        alertScore(context);
-      }
-      print('$longueurResponse');
     });
-    buttonClick();
   }
 
   void alertScore(BuildContext context) {
@@ -111,7 +84,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(10),
               child: Center(
                 child: Text(
-                  quizBrain.getQuestionText(questionNumber),
+                  quizBrain.getQuestionText(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
