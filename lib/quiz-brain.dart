@@ -13,4 +13,12 @@ class QuizBrain {
   bool getQuestionAnswer(int questionNumber) {
     return _questions[questionNumber].questionAnswer;
   }
+
+  longueurReponse(int reponseNumber) {
+    return _questions.length;
+  }
+
+  longueurQuestion(int questionNumber) {
+    return _questions.length;
+  }
 }

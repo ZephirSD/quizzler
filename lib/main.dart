@@ -26,7 +26,7 @@ class _QuizzlerState extends State<Quizzler> {
   int reponseNumber = 0;
   List<Icon> listIcons = [];
   buttonClick() {
-    int longueurQuestion = quizBrain.getQuestionText(questionNumber).length;
+    int longueurQuestion = quizBrain.longueurQuestion(questionNumber);
     setState(() {
       if (questionNumber < longueurQuestion - 1) {
         questionNumber++;
@@ -42,7 +42,7 @@ class _QuizzlerState extends State<Quizzler> {
 
   trueButton() {
     setState(() {
-      int longueurResponse = quizBrain.getQuestionText(questionNumber).length;
+      int longueurResponse = quizBrain.longueurReponse(reponseNumber);
       bool bonnereponse = quizBrain.getQuestionAnswer(questionNumber);
       if (reponseNumber < longueurResponse) {
         if (bonnereponse == true) {
@@ -61,7 +61,7 @@ class _QuizzlerState extends State<Quizzler> {
 
   falseButton() {
     setState(() {
-      int longueurResponse = quizBrain.getQuestionText(questionNumber).length;
+      int longueurResponse = quizBrain.longueurReponse(reponseNumber);
       bool bonnereponse = quizBrain.getQuestionAnswer(questionNumber);
       if (reponseNumber < longueurResponse) {
         if (bonnereponse == false) {
