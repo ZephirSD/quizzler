@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz-brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() {
   return runApp(
@@ -23,17 +25,12 @@ class _QuizzlerState extends State<Quizzler> {
   int questionNumber = 0;
   int reponseNumber = 0;
   List<Icon> listIcons = [];
-  List<Question> questions = [
-    Question("question1", true),
-    Question("question2", false),
-    Question("question3", true)
-  ];
   buttonClick() {
-    int longueurQuestion = questions.length;
+    int longueurQuestion = quizBrain.getQuestionText(questionNumber).length;
     setState(() {
       if (questionNumber < longueurQuestion - 1) {
         questionNumber++;
-        questions[questionNumber].questionText;
+        quizBrain.getQuestionText(questionNumber);
       }
       if (reponseNumber < longueurQuestion) {
         reponseNumber++;
@@ -45,8 +42,8 @@ class _QuizzlerState extends State<Quizzler> {
 
   trueButton() {
     setState(() {
-      int longueurResponse = questions.length;
-      bool bonnereponse = questions[questionNumber].questionAnswer;
+      int longueurResponse = quizBrain.getQuestionText(questionNumber).length;
+      bool bonnereponse = quizBrain.getQuestionAnswer(questionNumber);
       if (reponseNumber < longueurResponse) {
         if (bonnereponse == true) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
@@ -64,8 +61,8 @@ class _QuizzlerState extends State<Quizzler> {
 
   falseButton() {
     setState(() {
-      int longueurResponse = questions.length;
-      bool bonnereponse = questions[questionNumber].questionAnswer;
+      int longueurResponse = quizBrain.getQuestionText(questionNumber).length;
+      bool bonnereponse = quizBrain.getQuestionAnswer(questionNumber);
       if (reponseNumber < longueurResponse) {
         if (bonnereponse == false) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
@@ -114,7 +111,7 @@ class _QuizzlerState extends State<Quizzler> {
               padding: EdgeInsets.all(10),
               child: Center(
                 child: Text(
-                  questions[questionNumber].questionText,
+                  quizBrain.getQuestionText(questionNumber),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
