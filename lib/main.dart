@@ -23,11 +23,11 @@ class Quizzler extends StatefulWidget {
 
 class _QuizzlerState extends State<Quizzler> {
   List<Icon> listIcons = [];
-  trueButton() {
+  checkAnswer(bool reponseutilisateur) {
     setState(() {
-      bool bonnereponse = quizBrain.getQuestionAnswer();
+      reponseutilisateur = quizBrain.getQuestionAnswer();
       if (listIcons.length != quizBrain.longueurQuestion()) {
-        if (bonnereponse == true) {
+        if (reponseutilisateur == true) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
         } else {
           listIcons.add(Icon(Icons.close, color: Colors.red));
@@ -100,7 +100,7 @@ class _QuizzlerState extends State<Quizzler> {
               child: FlatButton(
                 color: Colors.green,
                 onPressed: () {
-                  trueButton();
+                  checkAnswer(true);
                 },
                 child: Text(
                   'True',
@@ -118,7 +118,7 @@ class _QuizzlerState extends State<Quizzler> {
               child: FlatButton(
                 color: Colors.red,
                 onPressed: () {
-                  falseButton();
+                  checkAnswer(false);
                 },
                 child: Text(
                   'False',
