@@ -1,136 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'quiz-brain.dart';
-
-QuizBrain quizBrain = QuizBrain();
+import 'quiz1.dart';
 
 void main() {
   return runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
-        body: Quizzler(),
+        body: Accueil(),
       ),
     ),
   );
 }
 
-class Quizzler extends StatefulWidget {
-  Quizzler({Key? key}) : super(key: key);
-
-  @override
-  _QuizzlerState createState() => _QuizzlerState();
-}
-
-class _QuizzlerState extends State<Quizzler> {
-  List<Icon> listIcons = [];
-  int scoreTrue = 0;
-  checkAnswer(bool reponseutilisateur) {
-    setState(() {
-      bool bonnereponse = quizBrain.getQuestionAnswer();
-      int longueurList = listIcons.length;
-      if (listIcons.length != quizBrain.longueurQuestion()) {
-        if (reponseutilisateur == bonnereponse) {
-          listIcons.add(Icon(Icons.check, color: Colors.green));
-          scoreTrue++;
-        } else {
-          listIcons.add(Icon(Icons.close, color: Colors.red));
-        }
-        quizBrain.nextQuestion();
-      } else {
-        Alert(
-          context: context,
-          type: AlertType.error,
-          title: "Vous avez terminé!!",
-          desc:
-              "Voici votre score $scoreTrue/$longueurList de bonne(s) réponse(s)",
-          buttons: [
-            DialogButton(
-              child: Text(
-                "Terminé",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              onPressed: () => Navigator.pop(context),
-              width: 120,
-            )
-          ],
-        ).show();
-        quizBrain.reset();
-        listIcons = [];
-        scoreTrue = 0;
-      }
-    });
-  }
+class Accueil extends StatelessWidget {
+  const Accueil({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 7,
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: Center(
-                child: Text(
-                  quizBrain.getQuestionText(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
+        decoration: new BoxDecoration(color: Colors.grey.shade900),
+        child: Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: FlatButton(
+                  padding: EdgeInsets.symmetric(vertical: 45),
+                  color: Colors.purple,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Quizzler()),
+                    );
+                  },
+                  child: Text(
+                    'Quiz1',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(15),
-              child: FlatButton(
-                color: Colors.green,
-                onPressed: () {
-                  checkAnswer(true);
-                },
-                child: Text(
-                  'True',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+              Expanded(
+                child: FlatButton(
+                  padding: EdgeInsets.symmetric(vertical: 45),
+                  color: Colors.purple.shade600,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Quizzler()),
+                    );
+                  },
+                  child: Text(
+                    'Quiz2',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(15),
-              child: FlatButton(
-                color: Colors.red,
-                onPressed: () {
-                  checkAnswer(false);
-                },
-                child: Text(
-                  'False',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+              Expanded(
+                child: FlatButton(
+                  padding: EdgeInsets.symmetric(vertical: 45),
+                  color: Colors.purple.shade400,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Quizzler()),
+                    );
+                  },
+                  child: Text(
+                    'Quiz3',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          SizedBox(
-            child: Padding(
-              padding: EdgeInsets.all(25),
-              child: Row(
-                children: listIcons,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }
