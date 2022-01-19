@@ -15,6 +15,30 @@ void main() {
   );
 }
 
+class Quizzler1 extends StatelessWidget {
+  const Quizzler1({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Quizzler"),
+        backgroundColor: Colors.grey.shade800,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Accueil()),
+            );
+          },
+        ),
+      ),
+      body: Quizzler(),
+    );
+  }
+}
+
 class Quizzler extends StatefulWidget {
   Quizzler({Key? key}) : super(key: key);
 
@@ -47,7 +71,7 @@ class _QuizzlerState extends State<Quizzler> {
           buttons: [
             DialogButton(
               child: Text(
-                "Terminé",
+                "Quitter",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: () {

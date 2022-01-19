@@ -30,7 +30,7 @@ class Accueil extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Quizzler()),
+                      MaterialPageRoute(builder: (context) => Quizzler1()),
                     );
                   },
                   child: Text(
