@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'quiz1.dart';
+import 'quiz/quiz1.dart';
+import 'quiz/quiz2.dart';
 
 void main() {
   return runApp(
@@ -49,7 +50,7 @@ class Accueil extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Quizzler()),
+                      MaterialPageRoute(builder: (context) => Quizzler2()),
                     );
                   },
                   child: Text(
@@ -68,7 +69,7 @@ class Accueil extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Quizzler()),
+                      MaterialPageRoute(builder: (context) => Quizzler2()),
                     );
                   },
                   child: Text(
