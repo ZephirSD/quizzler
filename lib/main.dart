@@ -24,12 +24,15 @@ class Quizzler extends StatefulWidget {
 
 class _QuizzlerState extends State<Quizzler> {
   List<Icon> listIcons = [];
+  int scoreTrue = 0;
   checkAnswer(bool reponseutilisateur) {
     setState(() {
       bool bonnereponse = quizBrain.getQuestionAnswer();
+      int longueurList = listIcons.length;
       if (listIcons.length != quizBrain.longueurQuestion()) {
         if (reponseutilisateur == bonnereponse) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
+          scoreTrue++;
         } else {
           listIcons.add(Icon(Icons.close, color: Colors.red));
         }
@@ -39,7 +42,8 @@ class _QuizzlerState extends State<Quizzler> {
           context: context,
           type: AlertType.error,
           title: "Vous avez terminé!!",
-          desc: "Voici votre score",
+          desc:
+              "Voici votre score $scoreTrue/$longueurList de bonne(s) réponse(s)",
           buttons: [
             DialogButton(
               child: Text(
@@ -51,6 +55,9 @@ class _QuizzlerState extends State<Quizzler> {
             )
           ],
         ).show();
+        quizBrain.reset();
+        listIcons = [];
+        scoreTrue = 0;
       }
     });
   }

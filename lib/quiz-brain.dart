@@ -24,4 +24,8 @@ class QuizBrain {
   bool getQuestionAnswer() {
     return _questions[_questionNumber].questionAnswer;
   }
+
+  void reset() {
+    _questionNumber = 0;
+  }
 }
