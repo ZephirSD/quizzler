@@ -26,14 +26,31 @@ class _QuizzlerState extends State<Quizzler> {
   List<Icon> listIcons = [];
   checkAnswer(bool reponseutilisateur) {
     setState(() {
-      reponseutilisateur = quizBrain.getQuestionAnswer();
+      bool bonnereponse = quizBrain.getQuestionAnswer();
       if (listIcons.length != quizBrain.longueurQuestion()) {
-        if (reponseutilisateur == true) {
+        if (reponseutilisateur == bonnereponse) {
           listIcons.add(Icon(Icons.check, color: Colors.green));
         } else {
           listIcons.add(Icon(Icons.close, color: Colors.red));
         }
         quizBrain.nextQuestion();
+      } else {
+        Alert(
+          context: context,
+          type: AlertType.error,
+          title: "Vous avez terminé!!",
+          desc: "Voici votre score",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "Terminé",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+            )
+          ],
+        ).show();
       }
     });
   }
@@ -100,10 +117,8 @@ class _QuizzlerState extends State<Quizzler> {
           SizedBox(
             child: Padding(
               padding: EdgeInsets.all(25),
-              child: Expanded(
-                child: Row(
-                  children: listIcons,
-                ),
+              child: Row(
+                children: listIcons,
               ),
             ),
           ),
